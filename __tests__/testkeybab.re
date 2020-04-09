@@ -21,15 +21,15 @@ describe("instruction", () => {
   open! Expect.Operators;
 
   test("j key", () =>
-    keyToCommand('j') |> expect |> toEqual(J)
+    keyToCommand("j") |> expect |> toEqual(J)
   );
 
   test("x key", () =>
-    keyToCommand('x') |> expect |> toEqual(UDKey('x'))
+    keyToCommand("x") |> expect |> toEqual(UDKey("x"))
   );
 
-  test("['j', 'x']", () =>
-    ['j', 'x']
+  test("[\"j\", \"x\"]", () =>
+    ["j", "x"]
     |> List.map(keyToCommand)
     |> instruction
     |> expect

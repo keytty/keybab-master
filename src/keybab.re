@@ -1,10 +1,10 @@
 type command =
   | J
-  | UDKey(char);
+  | UDKey(string);
 
 let keyToCommand = key =>
   switch (key) {
-  | 'j' => J
+  | "j" => J
   | x => UDKey(x)
   };
 
@@ -20,7 +20,7 @@ type feedback =
 
 let feedbackForLastCommand = c =>
   switch (c) {
-  | UDKey(k) => Feedback(String.make(1, k) ++ " is undefined")
+  | UDKey(k) => Feedback(k ++ " is undefined")
   | _ => None
   };
 
