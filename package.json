@@ -7,7 +7,7 @@
     "test": "jest",
     "testw": "jest --watchAll",
     "fmt-js": "prettier ./jstests --write",
-    "fmt-reason": "bsrefmt --in-place src/*.re",
+    "fmt-reason": "bsrefmt --in-place src/**/*.re",
     "fmt": "yarn fmt-reason && yarn fmt-js",
     "clean": "bsb -clean-world"
   },

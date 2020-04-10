@@ -3,8 +3,8 @@ open Expect;
 open! Expect.Operators;
 
 open Keybab;
-open Keybab.Command;
-open Keybab.Action;
+open Command;
+open Action;
 
 describe("Expect", () =>
   test("toBe", () =>
@@ -34,7 +34,7 @@ describe("instruction", () =>
     |> instruction
     |> expect
     |> toEqual({
-         actions: [{type_: Move}],
+         actions: [Move({axis: Vertical, amount: (-1)})],
          commands: [J],
          feedback: MsgFeedback("x is undefined"),
          nextAvailables: [J],
