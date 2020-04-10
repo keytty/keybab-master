@@ -1,25 +1,22 @@
 open Jest;
+open Expect;
+open! Expect.Operators;
+
 open Keybab;
 
 describe("Expect", () =>
-  Expect.(test("toBe", () =>
-            expect(1 + 2) |> toBe(3)
-          ))
+  test("toBe", () =>
+    expect(1 + 2) |> toBe(3)
+  )
 );
 
-describe("Expect.Operators", () => {
-  open Expect;
-  open! Expect.Operators;
-
+describe("Expect.Operators", () =>
   test("==", () =>
     expect(1 + 2) === 3
-  );
-});
+  )
+);
 
 describe("instruction", () => {
-  open Expect;
-  open! Expect.Operators;
-
   test("j key", () =>
     keyToCommand("j") |> expect |> toEqual(J)
   );
@@ -28,7 +25,7 @@ describe("instruction", () => {
     keyToCommand("x") |> expect |> toEqual(UDKey("x"))
   );
 
-  test("[\"j\", \"x\"]", () =>
+  test({j|["j", "x"]|j}, () =>
     ["j", "x"]
     |> List.map(keyToCommand)
     |> instruction
