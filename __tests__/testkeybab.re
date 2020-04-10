@@ -3,6 +3,8 @@ open Expect;
 open! Expect.Operators;
 
 open Keybab;
+open Keybab.Command;
+open Keybab.Action;
 
 describe("Expect", () =>
   test("toBe", () =>
@@ -16,7 +18,7 @@ describe("Expect.Operators", () =>
   )
 );
 
-describe("instruction", () => {
+describe("keyToCommand", () => {
   test("j key", () =>
     keyToCommand("j") |> expect |> toEqual(J)
   );
@@ -24,17 +26,18 @@ describe("instruction", () => {
   test("x key", () =>
     keyToCommand("x") |> expect |> toEqual(UDKey("x"))
   );
+});
 
+describe("instruction", () =>
   test({j|["j", "x"]|j}, () =>
     ["j", "x"]
-    |> List.map(keyToCommand)
     |> instruction
     |> expect
     |> toEqual({
          actions: [{type_: Move}],
          commands: [J],
-         feedback: Feedback("x is undefined"),
-         nextAvailable: [J],
+         feedback: MsgFeedback("x is undefined"),
+         nextAvailables: [J],
        })
-  );
-});
+  )
+);

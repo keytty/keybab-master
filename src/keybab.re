@@ -1,43 +1,57 @@
-type command =
-  | J
-  | UDKey(string);
+module Command = {
+  [@bs.deriving accessors]
+  type command =
+    | J
+    | UDKey(string);
 
-let keyToCommand = key =>
-  switch (key) {
-  | "j" => J
-  | x => UDKey(x)
-  };
+  let keyToCommand = key =>
+    switch (key) {
+    | "j" => J
+    | x => UDKey(x)
+    };
 
-let filterUndefined = c =>
-  switch (c) {
-  | J => true
-  | UDKey(_) => false
-  };
-
-type feedback =
-  | None
-  | Feedback(string);
-
-let feedbackForLastCommand = c =>
-  switch (c) {
-  | UDKey(k) => Feedback(k ++ " is undefined")
-  | _ => None
-  };
-
-type actionType =
-  | Move
-  | NoAction;
-
-type action = {
-  [@bs.as "type"]
-  type_: actionType,
+  let filterUndefined = c =>
+    switch (c) {
+    | J => true
+    | UDKey(_) => false
+    };
 };
+
+open Command;
+
+module Feedback = {
+  type feedback =
+    | NoFeedback
+    | MsgFeedback(string);
+
+  let feedbackForLastCommand = c =>
+    switch (c) {
+    | UDKey(k) => MsgFeedback(k ++ " is undefined")
+    | _ => NoFeedback
+    };
+};
+
+open Feedback;
+
+module Action = {
+  [@bs.deriving accessors]
+  type actionType =
+    | Move
+    | NoAction;
+
+  type action = {
+    [@bs.as "type"]
+    type_: actionType,
+  };
+};
+
+open Action;
 
 type instruction = {
   actions: list(action),
   commands: list(command),
   feedback,
-  nextAvailable: list(command),
+  nextAvailables: list(command),
 };
 
 let action = c =>
@@ -56,9 +70,12 @@ let actions = cs =>
        }
      );
 
-let instruction = cs => {
+let instructionFromCommands = cs => {
   actions: cs |> actions,
   commands: cs |> List.filter(filterUndefined),
   feedback: cs |> List.rev |> List.hd |> feedbackForLastCommand,
-  nextAvailable: [J],
+  nextAvailables: [J],
 };
+
+let instruction = ks =>
+  ks |> List.map(keyToCommand) |> instructionFromCommands;
