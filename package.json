@@ -7,6 +7,7 @@
     "test": "jest",
     "testw": "jest --watchAll",
     "fmt-js": "prettier ./jstests --write",
+    "fmt-jsw": "onchange ./jstests/**/* -- prettier --write {{changed}}",
     "fmt-reason": "bsrefmt --in-place src/**/*.re",
     "fmt": "yarn fmt-reason && yarn fmt-js",
     "clean": "bsb -clean-world"
@@ -19,6 +20,8 @@
   "devDependencies": {
     "@glennsl/bs-jest": "^0.5.1",
     "bs-platform": "^7.2.2",
-    "prettier": "^2.0.4"
+    "onchange": "^6.1.0",
+    "prettier": "^2.0.4",
+    "rxjs": "^6.5.5"
   }
 }
