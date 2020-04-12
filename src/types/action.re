@@ -1,20 +1,16 @@
-type axis =
-  | Vertical
-  | Horizontal;
-
-type move = {
-  axis,
-  amount: int,
+type coordinates = {
+  vertical: int,
+  horizontal: int,
 };
 
 type t =
-  | Move(move)
+  | Move(coordinates)
   | NoAction;
 
 let validActions = cs => {
   let commandToAction = c =>
     switch (c) {
-    | Command.J => Move({axis: Vertical, amount: (-1)})
+    | Command.J => Move({vertical: (-1), horizontal: 0})
     | UDKey(_) => NoAction
     };
 

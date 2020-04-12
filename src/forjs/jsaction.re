@@ -5,16 +5,12 @@ type t = {
   [@bs.as "type"]
   type_: string,
   [@bs.optional]
-  axis: string,
-  [@bs.optional]
-  amount: int,
+  coordinates,
 };
 
 module Glossary = {
   let move = "move";
   let noaction = "noaction";
-  let vertical = "vertical";
-  let horizontal = "horizontal";
 };
 
 let actionToStr =
@@ -22,17 +18,12 @@ let actionToStr =
   | Move(_) => Glossary.move
   | NoAction => Glossary.noaction;
 
-let axisToStr =
-  fun
-  | Vertical => Glossary.vertical
-  | Horizontal => Glossary.horizontal;
-
 let actionToJs = ac => {
   let actionStr = actionToStr(ac);
 
   switch (ac) {
-  | Move({axis: ax, amount: am}) =>
-    t(~type_=actionStr, ~axis=axisToStr(ax), ~amount=am, ())
+  | Move({vertical: v, horizontal: h}) =>
+    t(~type_=actionStr, ~coordinates={vertical: v, horizontal: h}, ())
   | NoAction => t(~type_=actionStr, ())
   };
 };

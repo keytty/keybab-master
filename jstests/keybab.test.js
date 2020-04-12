@@ -2,7 +2,7 @@ const keybab = require("../src/forjs/jsbridge.bs.js");
 
 const {
   instruction,
-  Action: { move, horizontal, vertical },
+  Action: { move },
   Command: { j },
 } = keybab;
 
@@ -11,8 +11,7 @@ describe("instruction", () => {
     expect(instruction(["j", "x"])).toEqual({
       actions: [
         {
-          axis: vertical,
-          amount: -1,
+          coordinates: { vertical: -1, horizontal: 0 },
           type: move,
         },
       ],
@@ -26,8 +25,7 @@ describe("instruction", () => {
     expect(instruction(["j", "x"])).toEqual({
       actions: [
         {
-          axis: "vertical",
-          amount: -1,
+          coordinates: { vertical: -1, horizontal: 0 },
           type: "move",
         },
       ],

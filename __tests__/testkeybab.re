@@ -34,7 +34,7 @@ describe("instruction", () =>
     |> instruction
     |> expect
     |> toEqual({
-         actions: [Move({axis: Vertical, amount: (-1)})],
+         actions: [Move({horizontal: 0, vertical: (-1)})],
          commands: [J],
          feedback: MsgFeedback("x is undefined"),
          nextAvailables: [J],
