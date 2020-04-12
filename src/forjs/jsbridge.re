@@ -17,7 +17,7 @@ let instructionToJs = {
     | NoFeedback => ""
     };
 
-  let toArray = (ins: instruction): jsInstruction => {
+  let toArray = (ins: Instruction.t): jsInstruction => {
     actions: ins.actions |> List.map(actionToJs) |> Array.of_list,
     commands: ins.commands |> List.map(commandToJs) |> Array.of_list,
     feedback: ins.feedback |> feedbackToString,
@@ -25,7 +25,7 @@ let instructionToJs = {
       ins.nextAvailables |> List.map(commandToJs) |> Array.of_list,
   };
 
-  ks => ks |> instruction |> toArray;
+  ks => ks |> Instruction.instruction |> toArray;
 };
 
 let instruction = ksArr => ksArr |> Array.to_list |> instructionToJs;

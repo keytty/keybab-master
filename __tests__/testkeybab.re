@@ -2,7 +2,7 @@ open Jest;
 open Expect;
 open! Expect.Operators;
 
-open Keybab;
+open Keybab.Instruction;
 open Command;
 open Action;
 
