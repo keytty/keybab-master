@@ -1,32 +1,20 @@
-type digit =
-  | D0
-  | D1
-  | D2
-  | D3
-  | D4
-  | D5
-  | D6
-  | D7
-  | D8
-  | D9;
-
 type t =
   | UDKey(string)
   | J
-  | Digit(digit);
+  | Dgt(Digit.t);
 
 let keyToKeybol = key =>
   switch (key) {
-  | "0" => Digit(D0)
-  | "1" => Digit(D1)
-  | "2" => Digit(D2)
-  | "3" => Digit(D3)
-  | "4" => Digit(D4)
-  | "5" => Digit(D5)
-  | "6" => Digit(D6)
-  | "7" => Digit(D7)
-  | "8" => Digit(D8)
-  | "9" => Digit(D9)
+  | "0" => Dgt(D0)
+  | "1" => Dgt(D1)
+  | "2" => Dgt(D2)
+  | "3" => Dgt(D3)
+  | "4" => Dgt(D4)
+  | "5" => Dgt(D5)
+  | "6" => Dgt(D6)
+  | "7" => Dgt(D7)
+  | "8" => Dgt(D8)
+  | "9" => Dgt(D9)
   | "j" => J
   | k => UDKey(k)
   };
@@ -41,5 +29,5 @@ let validKeybab = cs => {
   cs |> List.filter(filterOutUndefined);
 };
 
-let digits =
-  [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9] |> List.map(n => Digit(n));
+let allDigitKeybols =
+  Digit.[D0, D1, D2, D3, D4, D5, D6, D7, D8, D9] |> List.map(n => Dgt(n));

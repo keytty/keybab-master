@@ -11,7 +11,7 @@ let validActions = cs => {
   let keybolToAction = c =>
     switch (c) {
     | Keybol.J => Move({vertical: (-1), horizontal: 0})
-    | Digit(_) => NoAction
+    | Dgt(_) => NoAction
     | UDKey(_) => NoAction
     };
 

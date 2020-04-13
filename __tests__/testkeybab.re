@@ -1,8 +1,7 @@
 open Jest;
 open Expect;
 open! Expect.Operators;
-
-open Master.Instruction;
+open Master;
 open Keybol;
 open Action;
 
@@ -28,7 +27,26 @@ describe("keyToKeybol", () => {
   );
 });
 
+describe("Dgt", () => {
+  test({j|symbolize ["3", "9", "1"]|j}, () =>
+    ["3", "9", "1"]
+    |> List.map(keyToKeybol)
+    |> expect
+    |> toEqual([Dgt(D3), Dgt(D9), Dgt(D1)])
+  );
+
+  test({j|numerize ["3", "9", "1"]|j}, () =>
+    ["3", "9", "1"]
+    |> List.map(keyToKeybol)
+    |> Shifu.numerizeKeybol
+    |> expect
+    |> toEqual(391)
+  );
+});
+
 describe("instruction", () => {
+  open Instruction;
+
   test({j|["j", "x"]|j}, () =>
     ["j", "x"]
     |> instruction
@@ -37,7 +55,7 @@ describe("instruction", () => {
          actions: [Move({horizontal: 0, vertical: (-1)})],
          keybab: [J],
          feedback: MsgFeedback("x is undefined"),
-         nextAvailables: [J, ...digits],
+         nextAvailables: [J, ...allDigitKeybols],
        })
   );
 
@@ -53,7 +71,7 @@ describe("instruction", () => {
          ],
          keybab: [J, J, J],
          feedback: NoFeedback,
-         nextAvailables: [J, ...digits],
+         nextAvailables: [J, ...allDigitKeybols],
        })
   );
 });

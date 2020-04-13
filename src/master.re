@@ -18,7 +18,7 @@ module Instruction = {
       actions: cs |> validActions,
       keybab: cs |> validKeybab,
       feedback: cs |> feedbackForLastKeybol,
-      nextAvailables: [J, ...digits],
+      nextAvailables: [J, ...allDigitKeybols],
     };
 
     ks => ks |> List.map(keyToKeybol) |> instructionFromKeybab;
