@@ -28,7 +28,7 @@ describe("keyToCommand", () => {
   );
 });
 
-describe("instruction", () =>
+describe("instruction", () => {
   test({j|["j", "x"]|j}, () =>
     ["j", "x"]
     |> instruction
@@ -37,7 +37,23 @@ describe("instruction", () =>
          actions: [Move({horizontal: 0, vertical: (-1)})],
          commands: [J],
          feedback: MsgFeedback("x is undefined"),
-         nextAvailables: [J],
+         nextAvailables: [J, ...digits],
        })
-  )
-);
+  );
+
+  test({j|["j", "x", "j", "j"]|j}, () =>
+    ["j", "x", "j", "j"]
+    |> instruction
+    |> expect
+    |> toEqual({
+         actions: [
+           Move({horizontal: 0, vertical: (-1)}),
+           Move({horizontal: 0, vertical: (-1)}),
+           Move({horizontal: 0, vertical: (-1)}),
+         ],
+         commands: [J, J, J],
+         feedback: NoFeedback,
+         nextAvailables: [J, ...digits],
+       })
+  );
+});

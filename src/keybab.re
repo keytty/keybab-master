@@ -18,7 +18,7 @@ module Instruction = {
       actions: cs |> validActions,
       commands: cs |> validCommands,
       feedback: cs |> feedbackForLastCommand,
-      nextAvailables: [J],
+      nextAvailables: [J, ...digits],
     };
 
     ks => ks |> List.map(keyToCommand) |> instructionFromCommands;
