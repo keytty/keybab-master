@@ -10,6 +10,7 @@ module Instruction = {
     open Keybol;
     open Feedback;
     open Action;
+    open Keybab;
 
     let feedbackForLastKeybol = cs =>
       cs |> List.rev |> List.hd |> feedbackForKeybol;

@@ -15,8 +15,13 @@ module Internal = {
 };
 open Internal;
 
-let numerizeKeybol = ds =>
+let numerizeKeybab = ds =>
   ds
   |> List.filter(filterNonDigits)
   |> List.map(dgtToDigit)
   |> Digit.numerize;
+
+
+//TODO: refactor for better perfomance
+let numbersToKeybab = n =>
+n |> string_of_int |> Js.String.split("") |> Array.to_list|> List.map(keyToKeybol);

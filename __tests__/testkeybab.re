@@ -1,77 +1,40 @@
 open Jest;
 open Expect;
 open! Expect.Operators;
-open Master;
 open Keybol;
-open Action;
 
-describe("Expect", () =>
-  test("toBe", () =>
-    expect(1 + 2) |> toBe(3)
-  )
-);
+describe("tidy", () => {
+  open Mariekondo;
 
-describe("Expect.Operators", () =>
-  test("==", () =>
-    expect(1 + 2) === 3
-  )
-);
-
-describe("keyToKeybol", () => {
-  test("j key", () =>
-    keyToKeybol("j") |> expect |> toEqual(J)
-  );
-
-  test("x key", () =>
-    keyToKeybol("x") |> expect |> toEqual(UDKey("x"))
-  );
-});
-
-describe("Dgt", () => {
-  test({j|symbolize ["3", "9", "1"]|j}, () =>
-    ["3", "9", "1"]
-    |> List.map(keyToKeybol)
+  test("cacheEval 0", () =>
+    (
+      {
+        looseDigits: [],
+        drawerH: [],
+        drawerJ: [],
+        drawerK: [],
+        drawerL: [],
+        lastSymbol: None,
+      }: cache
+    )
+    |> evaluateCache
     |> expect
-    |> toEqual([Dgt(D3), Dgt(D9), Dgt(D1)])
+    |> toEqual([])
   );
 
-  test({j|numerize ["3", "9", "1"]|j}, () =>
-    ["3", "9", "1"]
-    |> List.map(keyToKeybol)
-    |> Shifu.numerizeKeybol
+  test("cacheEval 1", () =>
+    (
+      {
+        looseDigits: [Dgt(D2), Dgt(D3)],
+        drawerH: [],
+        drawerJ: [],
+        drawerK: [],
+        drawerL: [],
+        lastSymbol: Some(Dgt(D3)),
+      }: cache
+    )
+    |> evaluateCache
     |> expect
-    |> toEqual(391)
-  );
-});
-
-describe("instruction", () => {
-  open Instruction;
-
-  test({j|["j", "x"]|j}, () =>
-    ["j", "x"]
-    |> instruction
-    |> expect
-    |> toEqual({
-         actions: [Move({horizontal: 0, vertical: (-1)})],
-         keybab: [J],
-         feedback: MsgFeedback("x is undefined"),
-         nextAvailables: [J, ...allDigitKeybols],
-       })
-  );
-
-  test({j|["j", "x", "j", "j"]|j}, () =>
-    ["j", "x", "j", "j"]
-    |> instruction
-    |> expect
-    |> toEqual({
-         actions: [
-           Move({horizontal: 0, vertical: (-1)}),
-           Move({horizontal: 0, vertical: (-1)}),
-           Move({horizontal: 0, vertical: (-1)}),
-         ],
-         keybab: [J, J, J],
-         feedback: NoFeedback,
-         nextAvailables: [J, ...allDigitKeybols],
-       })
+    |> toEqual([Dgt(D2), Dgt(D3)])
   );
 });

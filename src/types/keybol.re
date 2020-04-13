@@ -18,19 +18,12 @@ let keyToKeybol = key =>
   | "7" => Dgt(D7)
   | "8" => Dgt(D8)
   | "9" => Dgt(D9)
+  | "h" => H
   | "j" => J
+  | "k" => K
+  | "l" => L
   | k => UDKey(k)
   };
-
-let validKeybab = cs => {
-  let filterOutUndefined = c =>
-    switch (c) {
-    | UDKey(_) => false
-    | _ => true
-    };
-
-  cs |> List.filter(filterOutUndefined);
-};
 
 let allDigitKeybols =
   Digit.[D0, D1, D2, D3, D4, D5, D6, D7, D8, D9] |> List.map(n => Dgt(n));
