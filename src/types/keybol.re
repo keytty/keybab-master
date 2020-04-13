@@ -3,13 +3,13 @@ type t =
   | Digit(int)
   | UDKey(string);
 
-let keyToCommand = key =>
+let keyToKeybol = key =>
   switch (key) {
   | "j" => J
   | k => UDKey(k)
   };
 
-let validCommands = cs => {
+let validKeybab = cs => {
   let filterOutUndefined = c =>
     switch (c) {
     | J => true

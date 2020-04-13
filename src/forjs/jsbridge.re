@@ -1,13 +1,13 @@
-open Keybab;
+open Master;
 open Feedback;
 open Jsaction;
-open Jscommand;
+open Jskeybol;
 
 type jsInstruction = {
   actions: array(Jsaction.t),
-  commands: array(Jscommand.t),
+  keybab: array(Jskeybol.t),
   feedback: string,
-  nextAvailables: array(Jscommand.t),
+  nextAvailables: array(Jskeybol.t),
 };
 
 let instructionToJs = {
@@ -19,10 +19,10 @@ let instructionToJs = {
 
   let toArray = (ins: Instruction.t): jsInstruction => {
     actions: ins.actions |> List.map(actionToJs) |> Array.of_list,
-    commands: ins.commands |> List.map(commandToJs) |> Array.of_list,
+    keybab: ins.keybab |> List.map(keybolToJs) |> Array.of_list,
     feedback: ins.feedback |> feedbackToString,
     nextAvailables:
-      ins.nextAvailables |> List.map(commandToJs) |> Array.of_list,
+      ins.nextAvailables |> List.map(keybolToJs) |> Array.of_list,
   };
 
   ks => ks |> Instruction.instruction |> toArray;
@@ -34,6 +34,6 @@ module Action = {
   include Jsaction.Glossary;
 };
 
-module Command = {
-  include Jscommand.Glossary;
+module Keybol = {
+  include Jskeybol.Glossary;
 };

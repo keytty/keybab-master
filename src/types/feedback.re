@@ -1,10 +1,10 @@
-open Command;
+open Keybol;
 
 type t =
   | NoFeedback
   | MsgFeedback(string);
 
-let feedbackForCommand = c =>
+let feedbackForKeybol = c =>
   switch (c) {
   | UDKey(k) => MsgFeedback(k ++ " is undefined")
   | _ => NoFeedback

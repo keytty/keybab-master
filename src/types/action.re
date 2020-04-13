@@ -8,9 +8,9 @@ type t =
   | NoAction;
 
 let validActions = cs => {
-  let commandToAction = c =>
+  let keybolToAction = c =>
     switch (c) {
-    | Command.J => Move({vertical: (-1), horizontal: 0})
+    | Keybol.J => Move({vertical: (-1), horizontal: 0})
     | Digit(_) => NoAction
     | UDKey(_) => NoAction
     };
@@ -21,5 +21,5 @@ let validActions = cs => {
     | _ => true
     };
 
-  cs |> List.map(commandToAction) |> List.filter(filterOutNoAction);
+  cs |> List.map(keybolToAction) |> List.filter(filterOutNoAction);
 };

@@ -3,7 +3,7 @@ const keybab = require("../src/forjs/jsbridge.bs.js");
 const {
   instruction,
   Action: { move },
-  Command: { j, digits },
+  Keybol: { j, digits },
 } = keybab;
 
 describe("instruction", () => {
@@ -15,7 +15,7 @@ describe("instruction", () => {
           type: move,
         },
       ],
-      commands: [j],
+      keybab: [j],
       feedback: "x is undefined",
       nextAvailables: [j, ...digits],
     });
@@ -29,7 +29,7 @@ describe("instruction", () => {
           type: "move",
         },
       ],
-      commands: ["j"],
+      keybab: ["j"],
       feedback: "x is undefined",
       nextAvailables: ["j", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
     });

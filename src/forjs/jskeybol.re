@@ -1,4 +1,4 @@
-open Command;
+open Keybol;
 
 type t = string;
 
@@ -17,7 +17,7 @@ module Glossary = {
   let digits = [|d0, d1, d2, d3, d4, d5, d6, d7, d8, d9|];
 };
 
-let commandToJs = (c: Command.t) =>
+let keybolToJs = (c: Keybol.t) =>
   switch (c) {
   | J => Glossary.j
   | Digit(n) => n |> string_of_int
