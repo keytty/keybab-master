@@ -1,7 +1,10 @@
 type t = string;
 
 module Glossary = {
+  let h = "h";
   let j = "j";
+  let k = "k";
+  let l = "l";
   let d0 = "0";
   let d1 = "1";
   let d2 = "2";
@@ -36,7 +39,10 @@ open Keybol;
 
 let keybolToJs = (c: Keybol.t) =>
   switch (c) {
-  | J => Glossary.j
+  | H => h
+  | J => j
+  | K => k
+  | L => l
   | Dgt(n) => digitToJs(n)
   | UDKey(k) => k
   };

@@ -1,6 +1,9 @@
 type t =
   | UDKey(string)
+  | H
   | J
+  | K
+  | L
   | Dgt(Digit.t);
 
 let keyToKeybol = key =>

@@ -13,10 +13,11 @@ module Glossary = {
   let noaction = "noaction";
 };
 
+open Glossary;
 let actionToStr =
   fun
-  | Move(_) => Glossary.move
-  | NoAction => Glossary.noaction;
+  | Move(_) => move
+  | NoAction => noaction;
 
 let actionToJs = ac => {
   let actionStr = actionToStr(ac);

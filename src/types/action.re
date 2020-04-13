@@ -8,9 +8,13 @@ type t =
   | NoAction;
 
 let validActions = cs => {
+  open Keybol;
   let keybolToAction = c =>
     switch (c) {
-    | Keybol.J => Move({vertical: (-1), horizontal: 0})
+    | H => Move({vertical: 0, horizontal: (-1)})
+    | J => Move({vertical: (-1), horizontal: 0})
+    | K => Move({vertical: 1, horizontal: 0})
+    | L => Move({vertical: 0, horizontal: (-1)})
     | Dgt(_) => NoAction
     | UDKey(_) => NoAction
     };
