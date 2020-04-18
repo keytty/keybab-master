@@ -1,6 +1,6 @@
 const { Observable } = require("rxjs");
 const { filter, map, scan } = require("rxjs/operators");
-const { marblet, expectUpstream } = require("./marblet.lib.js");
+const { marblet, expectUpstream } = require("marblet");
 
 const operators = {
   combine: (source$) => source$.pipe(scan((acc, one) => [...acc, one], [])),

@@ -20,6 +20,7 @@
   "devDependencies": {
     "@glennsl/bs-jest": "^0.5.1",
     "bs-platform": "^7.2.2",
+    "marblet": "^1.0.0",
     "onchange": "^6.1.0",
     "prettier": "^2.0.4",
     "rxjs": "^6.5.5"

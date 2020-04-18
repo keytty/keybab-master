@@ -1,6 +1,6 @@
 const { Observable } = require("rxjs");
 const { filter, map } = require("rxjs/operators");
-const { marblet, expectUpstream } = require("./marblet.lib.js");
+const { marblet, expectUpstream } = require("marblet");
 
 const operators = {
   identity: (source$) => source$.pipe(map((n) => n)),
